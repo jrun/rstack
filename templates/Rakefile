@@ -1,0 +1,12 @@
+require 'rubygems'
+require 'rstack'
+require File.join(File.dirname(__FILE__), 'lib', '#{pathized_project_name}', 'version')
+
+RStack::Configuration.new do |config|
+  config.name     = '#{project_name}'
+  config.summary  = '[ENTER A SUMMARY]'
+  config.author   = '#{author}'
+  config.email    = '[ENTER YOUR EMAIL]'
+  config.url      = '[ENTER A PROJECT URL]'
+  config.version  = #{module_name}::Version::STRING
+end

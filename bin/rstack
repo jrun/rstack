@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require 'rstack'
+require 'optparse'
+
+parser = OptionParser.new do |opts|
+  opts.banner = <<BANNER
+Generate a standardized gem which uses rspec.
+
+Usage: rstack [ENTER NAME OF GEM]
+
+Options:
+BANNER
+  opts.on("-h", "--help", "Show this help message.") { puts opts; exit }
+  opts.parse!(ARGV)
+end
+parser.parse!(["-h"]) unless ARGV[0]
+
+RStack::Generator.new(ARGV[0]).run

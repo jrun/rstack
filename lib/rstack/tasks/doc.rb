@@ -7,7 +7,7 @@ module RStack
         rdoc.rdoc_dir = configuration.outpath + '/doc'
         rdoc.title    = "#{configuration.gem_name} -- #{configuration.version}"
         rdoc.main     = 'README.txt'
-        rdoc.template = RStack.vendor + "/allison-2.0.2/lib/allison"
+        rdoc.template = RStack.vendor / 'allison-2.0.2' / 'lib' / 'allison.rb'
         rdoc.options  << '--line-numbers' << '--inline-source'
       end      
     end

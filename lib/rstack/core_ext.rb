@@ -11,3 +11,7 @@ end
 class String
   include RStack::CoreExtensions::String
 end
+
+class Pathname
+  alias / +
+end

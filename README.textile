@@ -35,9 +35,23 @@ require File.join(File.dirname(__FILE__), 'lib', 'ninjas', 'version')
 
 RStack::Configuration.new 'ninjas' do |config|
   config.summary = '[ENTER A SUMMARY]'
-  config.author = 'ENTER YOUR NAME'
+  config.author = 'jrun'
   config.email = '[ENTER YOUR EMAIL]'
   config.url = '[ENTER A PROJECT URL]'
   config.version = Ninjas::Version::STRING
 end
 </pre></code>
+
+h2. Available Tasks
+<pre><code>
+jrun ~/tmp/ninjas $ rake -T
+(in /Users/jrun/tmp/ninjas)
+rake clobber_package             # Remove package products
+rake clobber_spec:with_coverage  # Remove rcov products for spec:with_coverage
+rake gem                         # Build the gem file ninjas-0.1.0.gem
+rake package                     # Build all the packages
+rake repackage                   # Force a rebuild of the package files
+rake spec                        # Run specs
+rake spec:with_coverage          # Run specs through RCov and generate HTML...
+</code></pre>
+

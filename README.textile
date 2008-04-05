@@ -1,0 +1,43 @@
+h2. Why?
+
+"newgem":http://newgem.rubyforge.org/ and "hoe":http://seattlerb.rubyforge.org/hoe/ work great for open source projects. RStack is intended to be used behind the firewall. There are a couple of other differences. One being it uses "RSpec":http://rspec.info/ rather than test/unit. The second difference is RStack automatically works with "CruiseControl.rb":http://cruisecontrolrb.thoughtworks.com/. It does that by adding a @cruise_config.rb@ configuration and by including a @cruise@ task.
+
+h2. Usage
+
+<pre><code>
+rstack ninjas
+</code></pre>
+
+h2. Generated Files and Directories
+
+<pre><code>
+jrun ~/tmp $ rstack ninjas
+creating ninjas/lib/ninjas
+creating ninjas/spec/shared
+creating ninjas/spec
+creating ninjas/bin
+creating ninjas/lib
+creating ninjas/lib
+moving Rakefile to ninjas/Rakefile
+moving README.txt to ninjas/README.txt
+moving cruise_config.rb to ninjas/cruise_config.rb
+moving main.rb to ninjas/lib/ninjas.rb
+moving version.rb to ninjas/lib/ninjas/version.rb
+moving spec_helper.rb to ninjas/spec/spec_helper.rb
+</pre></code>
+
+h2. Generated Rakefile
+
+<pre><code>
+require 'rubygems'
+require 'rstack'
+require File.join(File.dirname(__FILE__), 'lib', 'ninjas', 'version')
+
+RStack::Configuration.new 'ninjas' do |config|
+  config.summary = '[ENTER A SUMMARY]'
+  config.author = 'ENTER YOUR NAME'
+  config.email = '[ENTER YOUR EMAIL]'
+  config.url = '[ENTER A PROJECT URL]'
+  config.version = Ninjas::Version::STRING
+end
+</pre></code>

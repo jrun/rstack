@@ -16,7 +16,7 @@ module RStack
         @main_path = Pathname.new path_without_last
       end
       
-      @templates_path       = Pathname.new(RSTACK_ROOT) + 'templates'     
+      @templates_path       = Pathname.new(RStack.root) + 'templates'     
       @active_support_path  = Pathname.new(File.dirname(__FILE__) + '/vendor/activesupport') 
     end
     

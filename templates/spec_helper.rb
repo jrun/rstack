@@ -1,5 +1,4 @@
 $:.unshift(File.dirname(__FILE__) + '/../lib')
-require 'rspec'
 require '#{main}'
 
 # extension modules for use in specs

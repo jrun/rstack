@@ -6,8 +6,8 @@ module RStack
     
     attr_reader :outpath
     
-    def initialize      
-      @gem_name         = '[ENTER A NAME]'
+    def initialize(gem_name)
+      @gem_name         = gem_name
       @summary          = '[ENTER A SUMMARY]'
       @author           = '[ENTER A AUTHOR]'
       @email            = '[ENTER YOUR EMAIL]'

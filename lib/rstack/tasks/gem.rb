@@ -15,10 +15,10 @@ module RStack
           s.add_dependency "rstack", ">= #{RStack::Version::STRING}"
         end
         
-        s.add_dependency 'rake',      '>= 0.7.2'
+        s.add_dependency 'rake',      '>= 0.8.1'
         s.add_dependency 'rcov',      '>= 0.8.0'
         s.add_dependency 'diff-lcs',  '>= 1.1.2'        
-        s.add_dependency 'rspec',     '>= 1.1.1'
+        s.add_dependency 'rspec',     '>= 1.1.3'
 
         configuration.dependencies.each do |dependency, version|
           s.add_dependency dependency, version

@@ -39,40 +39,6 @@ describe RStack::Generator do
   end    
 end
 
-describe RStack::Generator, "supporting dash-ed names" do
-  before(:each) do
-    @generator = RStack::Generator.new("foo-bar")
-  end
-  
-  it "should have a project name equal to the given project name" do
-    @generator.project_name.should == "foo-bar"
-  end
-  
-  it "should have a path equal to the project name" do
-    @generator.path.should == Pathname.new(@generator.project_name)
-  end
-
-  it "should have a pathized project name" do
-    @generator.pathized_project_name.should == "foo/bar"
-  end
-
-  it "should assign the last element to be the name of main .rb file" do
-    @generator.main.should == "bar.rb"
-  end
-  
-  it "should have a lib path should include the elements of the dasherized project name" do
-    @generator.paths[:lib].to_s.should == "foo-bar/lib"
-  end
-  
-  it "should have a main path that includes all the pathized elements but the last" do
-    @generator.paths[:main].to_s.should == "foo-bar/lib/foo"
-  end
-    
-  it "should have a project path that includes the pathized elements" do
-    @generator.paths[:project].to_s.should == "foo-bar/lib/foo/bar"
-  end  
-end
-
 describe RStack::Generator, "#move_template" do
   before(:each) do
     File.stub!(:read).and_return("foo")

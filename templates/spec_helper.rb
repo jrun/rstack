@@ -1,15 +1,9 @@
-$:.unshift(File.dirname(__FILE__) + '/../lib')
-require '#{main}'
-
-# extension modules for use in specs
-Dir.glob(File.dirname(__FILE__) + '/shared/*.rb').each {|f| require f }
+require '#{main.chomp('.rb')}'
 
 module SpecHelper
   def null_mock(name, options = {})
     mock name, options.merge(:null_object => true)
   end
-  
-  alias :null_stub :null_mock
 end
 
 Spec::Runner.configure do |config|

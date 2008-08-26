@@ -7,7 +7,7 @@ module RStack
     def initialize(project_name)
       @project_name           = project_name.downcase
       @pathized_project_name  = @project_name.pathize
-      @module_name            = @pathized_project_name.classify
+      @module_name            = @pathized_project_name.camelcase
       @path                   = Pathname.new @project_name
       
       returning @pathized_project_name.split("/") do |parts|
@@ -22,23 +22,22 @@ module RStack
     
     def paths
       {
-        :bin         => path + "bin",
-        :lib         => path + 'lib',
-        :main        => path + "lib" + @main_path,
-        :project     => path + "lib" + @pathized_project_name,
-        :spec        => path + "spec",
-        :spec_shared => path + "spec/shared"
+        :bin         => path / "bin",
+        :lib         => path / 'lib',
+        :main        => path / "lib" / @main_path,
+        :project     => path / "lib" / @pathized_project_name,
+        :spec        => path / "spec"
       }
     end
         
     def run
       create_directories
-      move_template "Rakefile",         path + "Rakefile"
-      move_template "README.txt",       path + "README.txt"
-      move_template "cruise_config.rb", path + "cruise_config.rb"      
-      move_template "main.rb",          paths[:main] + @main
-      move_template "version.rb",       paths[:project] + "version.rb"
-      move_template "spec_helper.rb",   paths[:spec] + "spec_helper.rb"
+      move_template "Rakefile",         path / "Rakefile"
+      move_template "README.txt",       path / "README.txt"
+      move_template "cruise_config.rb", path / "cruise_config.rb"      
+      move_template "main.rb",          paths[:main] / @main
+      move_template "version.rb",       paths[:project] / "version.rb"
+      move_template "spec_helper.rb",   paths[:spec] / "spec_helper.rb"
     end
   
     def create_directories

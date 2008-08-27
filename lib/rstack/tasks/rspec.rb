@@ -1,7 +1,12 @@
 module RStack
   class RSpec
-    def self.define_tasks(configuration)      
-      ::Spec::Rake::SpecTask.new do |t|
+    def self.define_tasks(configuration)
+      ::Spec::Rake::SpecTask.new do |t|        
+        t.spec_opts = if File.exist?('spec/spec.opts')
+          ['-O', 'spec/spec.opts' ]
+        else
+          ['--format', 'specdoc', '--diff', '--color']
+        end
         t.spec_files = configuration.spec_files
       end
       

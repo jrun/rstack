@@ -1,7 +1,6 @@
 module RStack
   class Gem
     def self.define_tasks(configuration)
-      ::Gem::manage_gems
       spec = ::Gem::Specification.new do |s|
         s.name      = configuration.gem_name
         s.version   = configuration.version

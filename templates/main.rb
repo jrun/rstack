@@ -1,1 +1,1 @@
-$:.unshift File.join(File.dirname(__FILE__), 'lib')
+$:.unshift File.exapnd_path(File.dirname(__FILE__))

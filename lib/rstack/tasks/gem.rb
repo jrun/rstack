@@ -30,7 +30,16 @@ module RStack
         s.has_rdoc          = configuration.has_rdoc
         #s.extra_rdoc_files  = ["README.txt"]
       end
-      ::Rake::GemPackageTask.new(spec) { |p| p.gem_spec = spec }     
+      ::Rake::GemPackageTask.new(spec) { |p| p.gem_spec = spec }
+      
+      namespace :gem do
+        desc "Repackage gem, uninstall and install again (does not use sudo)."
+        task :refresh => :repackage do
+          system "gem uninstall #{configuration.gem_name} -v #{configuration.version}"
+          system "gem install pkg/#{configuration.gem_name}-#{configuration.version}.gem"
+        end
+      end
+      
     end
   end
 end

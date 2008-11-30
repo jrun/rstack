@@ -1,7 +1,5 @@
 require 'rubygems'
-require 'rstack/facets_time_monkey_patch'
-require 'facets'
-require 'facets/pathname'
+require 'extlib'
 
 module RStack
   def self.root
@@ -13,7 +11,7 @@ module RStack
   end
 end
 
-Dir[RStack.vendor / '**'].each do |dir| 
+Pathname.glob((RStack.vendor / '**').to_s).each do |dir| 
   $:.unshift File.directory?(lib = "#{dir}/lib") ? lib : dir
 end
 
@@ -24,4 +22,4 @@ require 'rstack/version'
 require 'rstack/configuration'
 require 'rstack/generator'
 
-Dir[RStack.root / 'lib/rstack/tasks/*.rb'].each {|f| require f }
+Pathname.glob((RStack.root / 'lib/rstack/tasks/*.rb').to_s).each {|f| require f }

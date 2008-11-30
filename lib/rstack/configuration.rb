@@ -22,8 +22,10 @@ module RStack
       @executables      = []
       @dependencies     = {}
 
-      @outpath = ENV["CC_BUILD_ARTIFACTS"] || returning(FileUtils.getwd + '/out') do |out|
-        FileUtils.mkdir(out) unless File.exist?(out)
+      @outpath = ENV["CC_BUILD_ARTIFACTS"] || default_outpath
+      
+      unless File.exist?(@outpath)
+        FileUtils.mkdir(@outpath) 
       end
 
       yield self if block_given?
@@ -52,9 +54,14 @@ module RStack
       end
     end
     
-    private
-      def filelist_to_cleaned_a(filelist)
-        filelist.to_a.delete_if {|file| file.include?('.svn') || file.include?('rdoc') } 
-      end
+    def filelist_to_cleaned_a(filelist)
+      filelist.to_a.delete_if {|file| file.include?('.svn') || file.include?('rdoc') } 
+    end
+    private :filelist_to_cleaned_a
+    
+    def default_outpath
+      FileUtils.getwd / 'out'
+    end
+    private :default_outpath
   end
 end

@@ -12,7 +12,7 @@ module RStack
       
       desc "Run specs through RCov and generate HTML reports"
       ::Spec::Rake::SpecTask.new('spec:with_coverage') do |t|
-        t.rcov_dir      = configuration.outpath + '/coverage'
+        t.rcov_dir      = configuration.outpath / 'coverage'
         t.spec_files    = configuration.spec_files
         t.spec_opts     = ["--format", "html:#{configuration.outpath}/spec_report.html", "--diff"]
         t.fail_on_error = false

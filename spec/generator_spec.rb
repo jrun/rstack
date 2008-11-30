@@ -27,15 +27,15 @@ describe RStack::Generator do
   end
   
   it "should have a lib path should include the elements of the dasherized project name" do
-    @generator.paths[:lib].to_s.should == "foo/lib"
+    @generator.paths[:lib].to_s.should == RStack.root.to_s / "foo/lib"
   end
   
   it "should have a main path that includes all the pathized elements but the last" do
-    @generator.paths[:main].to_s.should == "foo/lib"
+    @generator.paths[:main].to_s.should == RStack.root.to_s / "foo/lib"
   end
 
   it "should have a project path that includes the pathized elements" do
-    @generator.paths[:project].to_s.should == "foo/lib/foo"
+    @generator.paths[:project].to_s.should == RStack.root.to_s / "foo/lib/foo"
   end    
 end
 

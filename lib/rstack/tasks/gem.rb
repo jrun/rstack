@@ -18,7 +18,7 @@ module RStack
         s.add_dependency 'rcov',          '>= 0.8.0'
         s.add_dependency 'diff-lcs',      '>= 1.1.2'        
         s.add_dependency 'rspec',         '>= 1.1.3'
-        s.add_dependency 'facets',        '>= 2.4.3'
+        s.add_dependency 'extlib'
 
         configuration.dependencies.each do |dependency, version|
           s.add_dependency dependency, version

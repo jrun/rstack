@@ -2,31 +2,27 @@ module RStack
   class Generator
     
     attr_reader :project_name, :pathized_project_name, :path, :main, :main_path, 
-                :module_name, :templates_path, :active_support_path
+                :module_name, :templates_path
     
     def initialize(project_name)
       @project_name           = project_name.downcase
-      @pathized_project_name  = @project_name.pathize
-      @module_name            = @pathized_project_name.camelcase
-      @path                   = Pathname.new @project_name
+      @pathized_project_name  = @project_name.to_const_path
+      @module_name            = @pathized_project_name.camel_case
+      @path                   = Pathname.new(@project_name)
       
-      returning @pathized_project_name.split("/") do |parts|
-        @main = parts.last + ".rb"
-        path_without_last = (parts - [parts.last]).join("/")
-        @main_path = Pathname.new path_without_last
-      end
-      
-      @templates_path       = Pathname.new(RStack.root) + 'templates'     
-      @active_support_path  = Pathname.new(File.dirname(__FILE__) + '/vendor/activesupport') 
+      parts = @pathized_project_name.split("/")
+      @main = parts.last + ".rb"
+      @main_path = Pathname.new((parts - [parts.last]).join("/"))
+      @templates_path = Pathname.new(RStack.root) / 'templates'     
     end
     
     def paths
       {
-        :bin         => path / "bin",
-        :lib         => path / 'lib',
-        :main        => path / "lib" / @main_path,
-        :project     => path / "lib" / @pathized_project_name,
-        :spec        => path / "spec"
+        :bin      => path / "bin",
+        :lib      => path / 'lib',
+        :main     => path / "lib" / @main_path,
+        :project  => path / "lib" / @pathized_project_name,
+        :spec     => path / "spec"
       }
     end
         

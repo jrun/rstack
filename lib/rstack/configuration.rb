@@ -2,7 +2,8 @@ module RStack
   class Configuration        
     attr_accessor :gem_name, :summary, :author, :email, :url, :version,
                   :platform, :spec_filelist, :package_filelist, :require_path,
-                  :has_rdoc, :rdoc_files, :outpath, :executables, :dependencies
+                  :has_rdoc, :rdoc_files, :outpath, :executables, :dependencies,
+                  :runtime_dependencies, :development_dependencies
     
     attr_reader :outpath
     
@@ -21,7 +22,8 @@ module RStack
       @has_rdoc         = false
       @executables      = []
       @dependencies     = {}
-
+      @runtime_dependencies     = {}
+      @development_dependencies = {}
       @outpath = ENV["CC_BUILD_ARTIFACTS"] || default_outpath
       
       unless File.exist?(@outpath)
@@ -47,7 +49,7 @@ module RStack
       RDoc.define_tasks   self if @has_rdoc
             
       task :default => :spec
-      task :repackage => "spec:with_coverage"
+      task :repackage => :spec
       task :cruise  do
         ::Rake::Task[:repackage].invoke
         ::Rake::Task[:rdoc].invoke if @has_rdoc

@@ -23,7 +23,15 @@ module RStack
         configuration.dependencies.each do |dependency, version|
           s.add_dependency dependency, version
         end
-              
+
+        configuration.runtime_dependencies.each do |dependency, version|
+          s.add_runtime_dependency dependency, version
+        end
+
+         configuration.development_dependencies.each do |dependency, version|
+          s.add_development_dependency dependency, version
+        end
+        
         s.files             = configuration.files
         s.executables       = configuration.executables
         s.require_path      = configuration.require_path

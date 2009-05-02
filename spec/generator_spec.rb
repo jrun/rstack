@@ -67,7 +67,7 @@ describe RStack::Generator, "#templates_path" do
   end
   
   it "should start with RSTACK_ROOT" do
-    @generator.templates_path.to_s.starts_with?(RStack.root).should be_true
+    @generator.templates_path.to_s.should =~ /^#{RStack.root}.*$/
   end
   
   it "should exist" do

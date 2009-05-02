@@ -11,7 +11,7 @@ module RStack
         s.homepage  = configuration.url
 
         unless configuration.gem_name == 'rstack'
-          s.add_dependency "rstack", ">= #{RStack::Version::STRING}"
+          s.add_development_dependency "rstack", ">= #{RStack::Version::STRING}"
         end
         
         s.add_dependency 'rake', '>= 0.8.1'

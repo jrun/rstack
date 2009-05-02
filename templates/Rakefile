@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rstack'
+require 'rstack/configuration'
 require File.join(File.dirname(__FILE__), 'lib', '#{pathized_project_name}', 'version')
 
 RStack::Configuration.new '#{project_name}' do |config|

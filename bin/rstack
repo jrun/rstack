@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'rstack'
+require 'rstack/configuration'
 require 'optparse'
 
 parser = OptionParser.new do |opts|

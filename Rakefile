@@ -1,5 +1,6 @@
 $:.unshift File.join(File.dirname(__FILE__), 'lib')
 require 'rstack'
+require 'rstack/configuration'
 
 RStack::Configuration.new 'rstack' do |config|
   config.summary            = "Provides a gem library generator and helpful rake tasks"

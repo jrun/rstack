@@ -1,5 +1,6 @@
 $:.unshift(File.dirname(__FILE__) + '/../lib')
 require 'rstack'
+require 'rstack/configuration'
 
 # extension modules for use in specs
 Dir.glob(File.dirname(__FILE__) + '/shared/*.rb').each {|f| require f }
@@ -14,7 +15,4 @@ end
 
 Spec::Runner.configure do |config|
   config.include(SpecHelper)
-  
-  # config.before(:each) do
-  # end
 end

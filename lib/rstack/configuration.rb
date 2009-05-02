@@ -1,3 +1,15 @@
+Pathname.glob((RStack.vendor / '**').to_s).each do |dir| 
+  $:.unshift File.directory?(lib = "#{dir}/lib") ? lib : dir
+end
+
+require 'rake/gempackagetask'
+require 'spec/rake/spectask'
+
+require 'rstack/version'
+require 'rstack/generator'
+
+Pathname.glob((RStack.root / 'lib/rstack/tasks/*.rb').to_s).each {|f| require f }
+
 module RStack
   class Configuration        
     attr_accessor :gem_name, :summary, :author, :email, :url, :version,
@@ -7,7 +19,7 @@ module RStack
     
     attr_reader :outpath
     
-    def initialize(gem_name)
+    def initialize(gem_name)      
       @gem_name         = gem_name
       @summary          = '[ENTER A SUMMARY]'
       @author           = '[ENTER A AUTHOR]'

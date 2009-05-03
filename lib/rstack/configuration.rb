@@ -1,14 +1,15 @@
-Pathname.glob((RStack.vendor / '**').to_s).each do |dir| 
+Dir[RStack.vendor.join('**').to_s].each do |dir| 
   $:.unshift File.directory?(lib = "#{dir}/lib") ? lib : dir
 end
 
 require 'rake/gempackagetask'
 require 'spec/rake/spectask'
 
+require 'rstack/core_ext'
 require 'rstack/version'
 require 'rstack/generator'
 
-Pathname.glob((RStack.root / 'lib/rstack/tasks/*.rb').to_s).each {|f| require f }
+Dir[RStack.root.join('lib/rstack/tasks/*.rb').to_s].each {|f| require f }
 
 module RStack
   class Configuration        
@@ -74,7 +75,7 @@ module RStack
     private :filelist_to_cleaned_a
     
     def default_outpath
-      FileUtils.getwd / 'out'
+      File.join(FileUtils.getwd, 'out')
     end
     private :default_outpath
   end

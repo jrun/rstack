@@ -6,34 +6,34 @@ module RStack
     
     def initialize(project_name)
       @project_name           = project_name.downcase
-      @pathized_project_name  = @project_name.to_const_path
-      @module_name            = @pathized_project_name.camel_case
-      @path                   = Pathname.new(@project_name)
+      @pathized_project_name  = @project_name.underscore
+      @module_name            = @pathized_project_name.camelize
+      @path                   = Pathname.new(@project_name).expand_path
       
       parts = @pathized_project_name.split("/")
       @main = parts.last + ".rb"
       @main_path = Pathname.new((parts - [parts.last]).join("/"))
-      @templates_path = Pathname.new(RStack.root) / 'templates'     
+      @templates_path = RStack.root.join('templates')
     end
     
     def paths
       {
-        :bin      => path / "bin",
-        :lib      => path / 'lib',
-        :main     => path / "lib" / @main_path,
-        :project  => path / "lib" / @pathized_project_name,
-        :spec     => path / "spec"
+        :bin      => path.join('bin'),
+        :lib      => path.join('lib'),
+        :main     => path.join('lib', @main_path),
+        :project  => path.join('lib', @pathized_project_name),
+        :spec     => path.join('spec')
       }
     end
         
     def run
       create_directories
-      move_template "Rakefile",         path / "Rakefile"
-      move_template "README.txt",       path / "README.txt"
-      move_template "cruise_config.rb", path / "cruise_config.rb"      
-      move_template "main.rb",          paths[:main] / @main
-      move_template "version.rb",       paths[:project] / "version.rb"
-      move_template "spec_helper.rb",   paths[:spec] / "spec_helper.rb"
+      move_template "Rakefile",         path.join('Rakefile')
+      move_template "README.txt",       path.join('README.txt')
+      move_template "cruise_config.rb", path.join('cruise_config.rb')
+      move_template "main.rb",          paths[:main].join(@main)
+      move_template "version.rb",       paths[:project].join('version.rb')
+      move_template "spec_helper.rb",   paths[:spec].join('spec_helper.rb')
     end
   
     def create_directories

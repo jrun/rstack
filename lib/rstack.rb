@@ -1,12 +1,13 @@
 require 'rubygems'
-require 'extlib'
+require 'pathname'
 
 module RStack
   def self.root
-    Pathname.new(File.dirname(__FILE__)).parent.expand_path
+    @root ||= Pathname.new(File.dirname(__FILE__)).parent.expand_path
   end
   
   def self.vendor
-    root / 'vendor'
+    @vendor ||= root.join('vendor')
   end
 end
+

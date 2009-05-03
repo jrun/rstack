@@ -69,7 +69,7 @@ module RStack
     end
     
     def filelist_to_cleaned_a(filelist)
-      filelist.to_a.delete_if {|file| file.include?('.svn') || file.include?('rdoc') } 
+      filelist.to_a.delete_if {|file| !! (file =~ /\.gemspec|\.svn|rdoc|pkg|out/) }
     end
     private :filelist_to_cleaned_a
     

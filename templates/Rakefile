@@ -7,6 +7,6 @@ RStack::Configuration.new '#{project_name}' do |config|
   config.summary  = '[ENTER A SUMMARY]'
   config.author   = '#{author}'
   config.email    = '[ENTER YOUR EMAIL]'
-  config.url      = '[ENTER A PROJECT URL]'
+  config.url      = ''
   config.version  = #{module_name}::Version::STRING
 end

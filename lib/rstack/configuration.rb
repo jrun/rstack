@@ -19,13 +19,13 @@ module RStack
                   :runtime_dependencies, :development_dependencies
     
     attr_reader :outpath
-    
+
     def initialize(gem_name)      
       @gem_name         = gem_name
       @summary          = '[ENTER A SUMMARY]'
       @author           = '[ENTER A AUTHOR]'
       @email            = '[ENTER YOUR EMAIL]'
-      @url              = '[ENTER A PROJECT URL]'
+      @url              = ''
       @require_path     = 'lib'
       @version          = "0.1.0"
       @platform         = ::Gem::Platform::RUBY

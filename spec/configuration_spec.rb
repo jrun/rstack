@@ -46,4 +46,5 @@ describe RStack::Configuration do
   it "should define a 'cruise' task" do
     Rake::Task.should be_task_defined("cruise")
   end
+
 end

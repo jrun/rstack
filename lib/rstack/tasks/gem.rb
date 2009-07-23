@@ -1,3 +1,5 @@
+require 'rubygems'
+
 module RStack
   class Gem
     def self.define_tasks(configuration)
@@ -27,7 +29,7 @@ module RStack
           s.add_runtime_dependency dependency, version
         end
 
-         configuration.development_dependencies.each do |dependency, version|
+        configuration.development_dependencies.each do |dependency, version|
           s.add_development_dependency dependency, version
         end
         
@@ -38,7 +40,18 @@ module RStack
         #s.extra_rdoc_files  = ["README.txt"]
       end
       ::Rake::GemPackageTask.new(spec) { |p| p.gem_spec = spec }
-            
+
+      desc "Install dependencies for development."
+      task :setup do
+        gems = ::Gem::SourceIndex.from_installed_gems
+        spec.dependencies.each do |dep|
+          if gems.find_name(dep.name, dep.version_requirements).empty?
+            puts "Installing dependency: #{dep}"
+            system %Q|gem install #{dep.name} -v "#{dep.version_requirements}"  --development|
+          end
+        end
+      end
+
       namespace :gem do
         desc "Repackage gem, uninstall and install again (does not use sudo)."
         task :refresh => :repackage do
